@@ -1,22 +1,20 @@
-const { ApplicationCommandOptionType } = require('discord.js');
+const { MessageEmbed } = require('discord.js');
 
 module.exports = {
   name: "n",
-  description: "Make the bot say Bunny Bunny! (Inspired by Kelvin Zhang aka Twilight)",
+  description: "Make the bot say Bunny Bunny! with the middle part bolded.",
   permissions: "0x0000000000000800",
   options: [],
 
   run: async (client, interaction) => {
     try {
-      const user = interaction.user;
-      const message = `Bun**ny Bu**nny!`;
+      const boldMessage = "Bun**ny Bu**nny!";
 
-      interaction.reply({
-        content: `${user}, ${message}`,
-        ephemeral: true // If you want to make the response visible only to the user who triggered the command
-      }).catch(e => {
-        console.error(e);
-      });
+      const embed = new MessageEmbed()
+        .setColor(client.config.embedColor)
+        .setDescription(boldMessage);
+
+      interaction.reply({ embeds: [embed] });
     } catch (e) {
       console.error(e);
     }
